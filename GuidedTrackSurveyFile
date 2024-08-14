@@ -1,0 +1,193 @@
+*label: start
+
+*question: Please enter a unique username to identify your responses. If you've taken this survey before, please use the same username.
+	*save: username
+	*tip: This username will be used to link your responses if you choose to describe multiple trance experiences. It will not be used to identify you personally.
+
+*if: username = ""
+	Please enter a username to continue.
+	*goto: start
+
+>> trance_counter = 1
+
+*question: In your own words, what does trance feel like to you? Please describe your typical trance experiences.
+	*type: paragraph
+	*save: trance_description
+
+*question: How variable is your trance experience?
+	*type: slider
+	*min: 1
+	*max: 5
+	*before: Always different
+	*after: Always the same
+	*save: trance_variability
+
+*label: trance_experience_start
+
+For the following questions, please answer according to your trance experience #{trance_counter}:
+
+*question: How do you usually go into this trance?
+	Files (audio/video)
+	Online play - text
+	Online play - voice
+	Online play - video
+	Online play - VR
+	In-person sessions
+	Self-hypnosis
+	*other
+	*save: trance_method
+
+*question: Which induction methods work best for you for this kind of trance? (Select all that apply)
+	*type: checkbox
+	*shuffle
+	Progressive relaxation
+	Guided Imagery
+	Confusion
+	Overload
+	Shock
+	Eye fixation
+	Countdown
+	Arm drop
+	Trigger
+	Revivification of past memories
+	Conversational/Ericksoninan methods
+	*other
+	*save: best_inductions
+
+*question: In this trance state, how would you characterize your thoughts? Pick the closest descriptor
+	Focused on one or some few specific thoughts (focused, flow like, in the zone)
+	Drifting between many thoughts (mind wandering, hypnagogic)
+	Having no thoughts (mind blank, dissociated, zoned out)
+	A change in identity/personality (role immersion: age, pet, (b/h)imbo, doll, IQ, drone, slut, slave, etc.)
+	Immersed in a fantasy (story immersion)
+	*other
+	*save: thought_character
+
+*question: How positive or negative do you typically feel in trance (emotionally speaking)?
+	*type: slider
+	*min: 1
+	*max: 7
+	*before: Very negative
+	*after: Very positive
+	*save: trance_valence
+
+*question: How in control of yourself and your experience do you typically feel in trance?
+	*type: slider
+	*min: 1
+	*max: 7
+	*before: Completely controlled
+	*after: Completely in control
+	*save: trance_dominance
+
+*question: How relaxed or energized do you typically feel in trance?
+	*type: slider
+	*min: 1
+	*max: 7
+	*before: Extremely relaxed
+	*after: Extremely energized
+	*save: trance_arousal
+
+*question: How does your perception of time change during trance?
+	Time seems to pass much slower
+	Time seems to pass slightly slower
+	No change in time perception
+	Time seems to pass slightly faster
+	Time seems to pass much faster
+	I lose track of time completely
+	*save: time_distortion
+
+*question: Do you experience any sensory alterations during trance? (Select all that apply)
+	*type: checkbox
+	*shuffle
+	Enhanced visual imagery
+	Changes in auditory perception
+	Altered sense of touch
+	Changes in temperature
+	Feeling out of body
+	Felling like sinking
+	Feeling of floating or weightlessness
+	Feeling of heaviness
+	Numbness or tingling sensations
+	No sensory alterations
+	*other
+	*save: sensory_alterations
+
+*question: Which of the following suggestions have you experienced in trance? (Select all that apply)
+	*type: checkbox
+	Hand lowering/lifting 
+	Hands moving together
+	Taste hallucination
+	Verbal inhibition (tip of the tongue, can't say the thing)
+	Body part too heavy/immobile to move
+	Body part too rigid to move
+	Posthypnotic suggestions and triggers
+	Semantic Amnesia (can't remember a name, number, concept or how something works)
+	Episodic Amnesia (can't remember something that happened)
+	Hallucinated voice, music or sounds
+	Negative visual hallucination (Not being able to see something that is there)
+	Positive visual hallucination (Seeing something that isn't there)
+	Age regression
+	None of the above
+	*save: experienced_suggestions
+	
+*question: How easy is it to talk or otherwise communicate when you are in trance compared to your normal waking state?
+	*type: slider
+	*min: 1
+	*max: 7
+	*before: Very easy
+	*after: Very hard
+	*save: communication_ability
+
+*question: How much more suggestible do you think you are in trance compared to your normal waking state?
+	*type: slider
+	*min: 1
+	*max: 7
+	*before: No difference
+	*after: Much more suggestible
+	*save: perceived_suggestibility
+
+*question: How aware are you that you're in a trance while you're experiencing it?
+	*type: slider
+	*min: 1
+	*max: 7
+	*before: Completely unaware
+	*after: Fully aware
+	*save: meta_awareness
+
+*question: How hard is it to get out of trance for you?
+	*type: slider
+	*min: 1
+	*max: 7
+	*before: Very easy
+	*after: Very hard
+	*save: trance_inertia
+
+*question: What aftereffects do you typically experience following a trance session? (Select all that apply)
+	*type: checkbox
+	*shuffle
+	Relaxation
+	Energized feeling
+	Improved mood
+	Clarity of thought
+	Lingering physical sensations
+	Amnesia for trance events
+	Continued suggestibility
+	No noticeable aftereffects
+	*other
+	*save: aftereffects
+
+*question: Would you like to describe another trance experience?
+	Yes
+	No
+	*save: continue_survey
+
+*if: continue_survey = "Yes"
+	>> trance_counter = trance_counter + 1
+	*goto: trance_experience_start
+
+*if: continue_survey = "No"
+	*goto: survey_end
+
+*label: survey_end
+
+Thank you for completing the survey, {username}!
